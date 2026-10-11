@@ -1,0 +1,137 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Fraunces", "Noto Serif Devanagari", Georgia, serif;
+  --font-sans: "Manrope", "Noto Sans Devanagari", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 14px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-harvest: var(--harvest);
+  --color-harvest-foreground: var(--harvest-foreground);
+  --color-sage: var(--sage);
+  --color-ivory: var(--ivory);
+  --color-charcoal: var(--charcoal);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.875rem;
+  /* Palette: Ivory #F6F4ED, Sage #DDE8D7, Forest #315B43, Harvest #E9A45B, Charcoal #242B26 */
+  --ivory: oklch(0.966 0.012 95);
+  --sage: oklch(0.916 0.03 140);
+  --forest: oklch(0.42 0.065 155);
+  --harvest: oklch(0.77 0.12 65);
+  --harvest-foreground: oklch(0.25 0.03 60);
+  --charcoal: oklch(0.27 0.014 150);
+
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
+  --card: oklch(0.985 0.008 95);
+  --card-foreground: var(--charcoal);
+  --popover: oklch(0.985 0.008 95);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--forest);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--sage);
+  --secondary-foreground: oklch(0.3 0.05 155);
+  --muted: oklch(0.935 0.014 100);
+  --muted-foreground: oklch(0.48 0.02 150);
+  --accent: var(--harvest);
+  --accent-foreground: var(--harvest-foreground);
+  --destructive: oklch(0.55 0.17 30);
+  --destructive-foreground: var(--ivory);
+  --success: oklch(0.55 0.11 150);
+  --border: oklch(0.88 0.018 110);
+  --input: oklch(0.86 0.02 110);
+  --ring: var(--harvest);
+
+  --shadow-clay: 0 1px 0 oklch(1 0 0 / 70%) inset, 0 -2px 0 oklch(0.42 0.065 155 / 6%) inset,
+    0 10px 24px -14px oklch(0.27 0.014 150 / 28%);
+  --shadow-clay-pressed: inset 0 2px 6px oklch(0.27 0.014 150 / 15%);
+  --shadow-lift: 0 22px 40px -24px oklch(0.27 0.014 150 / 40%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@utility clay {
+  background: var(--card);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-clay);
+}
+@utility clay-sage {
+  background: var(--sage);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-clay);
+}
+@utility lift {
+  transition: transform 300ms cubic-bezier(.2,.7,.2,1), box-shadow 300ms;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+@utility page-enter {
+  animation: page-in 500ms cubic-bezier(.2,.7,.2,1) both;
+}
+@utility eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted-foreground);
+}
+@utility grain-overlay {
+  background: linear-gradient(180deg, oklch(0.27 0.014 150 / 10%) 0%, oklch(0.27 0.014 150 / 75%) 100%);
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
